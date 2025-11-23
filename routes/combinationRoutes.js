@@ -15,5 +15,17 @@ router.post(
     combinationController.generateCombinations
 );
 
+/**
+ * POST /v2/generate
+ * Generate valid combinations using loop-based algorithm (v2)
+ * Body example: { items: [1, 2, 1], length: 2 }
+ */
+router.post(
+    '/v2/generate',
+    validate(generateCombinationSchema),
+    validateLengthVsItems,
+    combinationController.generateCombinationsV2
+);
+
 module.exports = router;
 

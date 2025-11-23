@@ -16,7 +16,24 @@ const generateCombinations = async (req, res, next) => {
     }
 };
 
+/**
+ * Generate valid combinations from items and store in the database (v2 - using loop-based algorithm)
+ * POST /v2/generate
+ */
+const generateCombinationsV2 = async (req, res, next) => {
+    try {
+        const { items, length } = req.body;
+
+        const result = await combinationService.generateAndStoreCombinationsV2(items, length);
+
+        res.status(200).json(result);
+    } catch (error) {
+        next(error);
+    }
+};
+
 module.exports = {
-    generateCombinations
+    generateCombinations,
+    generateCombinationsV2
 };
 
